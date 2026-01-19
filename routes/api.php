@@ -22,3 +22,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/companies', [CompanyController::class, 'index']);
 Route::post('/tasks/create', [TaskController::class, 'store']);
+
+//Route::apiResource('companies', CompanyController::class)
+    //->only(['index']);
+
+//Route::apiResource('task', TaskController::class)
+    //->only(['store']);

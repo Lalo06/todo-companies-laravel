@@ -31,7 +31,7 @@ class Task extends Model
         'updated_at',
     ];
 
-    public function company()
+    public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
