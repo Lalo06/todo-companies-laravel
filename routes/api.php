@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,8 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/companies', [CompanyController::class, 'index']);
-Route::post('/tasks/create', [TaskController::class, 'store']);
+Route::apiResource('tasks', TaskController::class);
+Route::apiResource('companies', CompanyController::class);
+Route::apiResource('users', UserController::class);
+Route::apiResource('projects', ProjectController::class);
 
 //Route::apiResource('companies', CompanyController::class)
     //->only(['index']);

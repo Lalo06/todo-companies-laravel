@@ -18,6 +18,7 @@ class Task extends Model
         'is_completed',
         'start_at',
         'expired_at',
+        'project_id',
     ];
 
     protected $casts = [
@@ -31,6 +32,14 @@ class Task extends Model
         'updated_at',
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($task) {
+            $task->start_at = now();
+            $task->expired_at = now()->addDays(7);
+        });
+    }
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
@@ -38,6 +47,11 @@ class Task extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
     }
 }

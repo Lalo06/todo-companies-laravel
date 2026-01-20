@@ -2,10 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TaskResource extends JsonResource
+class ProjectResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +19,10 @@ class TaskResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'is_completed' => $this->is_completed,
-            'start_at' => $this->start_at,
-            'expired_at' => $this->expired_at,
-            'user' => new UserResource($this->whenLoaded('user')),
-            'company' => new CompanyResource($this->whenLoaded('company')),
-            'project' => new ProjectResource($this->whenLoaded('project')),
+
+            'tasks' => TaskResource::collection(
+                $this->whenLoaded('tasks')
+            ),
         ];
     }
 }

@@ -17,6 +17,10 @@ class CompanyResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+
+            'tasks' => TaskResource::collection(
+                $this->whenLoaded('tasks'),
+            )
         ];
     }
 }

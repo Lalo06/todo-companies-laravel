@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\MaxUserAssignedTasks;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreTaskRequest extends FormRequest
+class StoreProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,12 +22,8 @@ class StoreTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'user_id' => ['required', 'exists:users,id', new MaxUserAssignedTasks(5)],
-            'company_id' => 'required|exists:companies,id',
-            'project_id' => ['nullable', 'exists:projects,id'],
-            'is_completed' => 'boolean',
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['nullable', 'string'],
         ];
     }
 }
